@@ -1,0 +1,714 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+
+    background: #080808;
+
+    color: white;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    overflow: hidden;
+
+}
+
+
+#game-container {
+
+    width: 100vw;
+
+    height: 100vh;
+
+    position: relative;
+
+}
+
+
+canvas {
+
+    width: 100%;
+
+    height: 100%;
+
+    display: block;
+
+}
+
+
+/* ================= HUD ================= */
+
+#hud {
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+}
+
+
+.hud-left {
+
+    position: absolute;
+
+    top: 22px;
+
+    left: 25px;
+
+}
+
+
+.logo {
+
+    font-size: 24px;
+
+    font-weight: 900;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.stat-label {
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+
+    color: #aaa;
+
+}
+
+
+.health-background {
+
+    width: 220px;
+
+    height: 8px;
+
+    background: #292929;
+
+    margin-top: 6px;
+
+}
+
+
+#healthBar {
+
+    width: 100%;
+
+    height: 100%;
+
+    background: #42e66b;
+
+    transition: width 0.15s;
+
+}
+
+
+.hud-center {
+
+    position: absolute;
+
+    top: 22px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    text-align: center;
+
+}
+
+
+#timer {
+
+    font-size: 30px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+}
+
+
+.level-text {
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+
+    color: #999;
+
+    margin-top: 5px;
+
+}
+
+
+.hud-right {
+
+    position: absolute;
+
+    top: 25px;
+
+    right: 25px;
+
+    text-align: right;
+
+}
+
+
+.money {
+
+    color: #ffd43b;
+
+    font-size: 21px;
+
+    font-weight: bold;
+
+}
+
+
+.points {
+
+    color: #ddd;
+
+    margin-top: 7px;
+
+    font-size: 14px;
+
+}
+
+
+/* ================= TARGET ================= */
+
+#targetInfo {
+
+    position: absolute;
+
+    top: 115px;
+
+    left: 25px;
+
+    color: #999;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+}
+
+
+/* ================= TOOL BAR ================= */
+
+#toolBar {
+
+    position: absolute;
+
+    bottom: 25px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    display: flex;
+
+    gap: 12px;
+
+    z-index: 10;
+
+}
+
+
+#toolBar.locked {
+
+    display: none;
+
+}
+
+
+.tool-slot {
+
+    width: 105px;
+
+    height: 105px;
+
+    background: rgba(12,12,12,0.95);
+
+    border: 2px solid #383838;
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    transition: 0.15s;
+
+}
+
+
+.tool-slot:hover {
+
+    border-color: white;
+
+    transform: translateY(-4px);
+
+}
+
+
+.tool-slot.selected {
+
+    border-color: #ffd43b;
+
+}
+
+
+.key {
+
+    position: absolute;
+
+    top: 6px;
+
+    left: 8px;
+
+    color: #777;
+
+    font-size: 10px;
+
+}
+
+
+.tool-icon {
+
+    font-size: 27px;
+
+    margin-bottom: 5px;
+
+}
+
+
+.tool-name {
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+
+}
+
+
+.tool-status {
+
+    font-size: 8px;
+
+    color: #777;
+
+    margin-top: 5px;
+
+}
+
+
+/* ================= TOOL POP ANIMATION ================= */
+
+.tool-pop {
+
+    animation: toolPop 0.6s ease;
+
+}
+
+
+@keyframes toolPop {
+
+    0% {
+
+        transform:
+            translateX(-50%)
+            translateY(100px)
+            scale(0.5);
+
+        opacity: 0;
+
+    }
+
+    60% {
+
+        transform:
+            translateX(-50%)
+            translateY(-10px)
+            scale(1.1);
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        transform:
+            translateX(-50%)
+            translateY(0)
+            scale(1);
+
+        opacity: 1;
+
+    }
+
+}
+
+
+/* ================= POPUPS ================= */
+
+.popup {
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(0,0,0,0.72);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 50;
+
+}
+
+
+.popup-box {
+
+    width: 420px;
+
+    padding: 40px;
+
+    text-align: center;
+
+    background: #111;
+
+    border: 1px solid #555;
+
+    box-shadow:
+        0 20px 80px rgba(0,0,0,0.8);
+
+}
+
+
+.unlock-icon {
+
+    font-size: 45px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.popup-box h1 {
+
+    font-size: 26px;
+
+    letter-spacing: 5px;
+
+}
+
+
+.popup-box p {
+
+    color: #aaa;
+
+    margin-top: 12px;
+
+}
+
+
+.small-text {
+
+    font-size: 12px;
+
+    color: #666 !important;
+
+}
+
+
+.popup-box button {
+
+    margin-top: 25px;
+
+    padding: 13px 35px;
+
+    background: white;
+
+    color: black;
+
+    border: none;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    letter-spacing: 2px;
+
+}
+
+
+.popup-box button:hover {
+
+    background: #ddd;
+
+}
+
+
+/* ================= SHOP ================= */
+
+.shop-box {
+
+    width: 430px;
+
+    padding: 30px;
+
+    background: #111;
+
+    border: 1px solid #444;
+
+    text-align: center;
+
+}
+
+
+.shop-box h2 {
+
+    letter-spacing: 5px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.shop-money {
+
+    color: #ffd43b;
+
+    font-size: 14px;
+
+    margin-bottom: 22px;
+
+}
+
+
+.shop-options {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+
+}
+
+
+.shop-options button {
+
+    padding: 18px 10px;
+
+    background: #1b1b1b;
+
+    color: white;
+
+    border: 1px solid #444;
+
+    cursor: pointer;
+
+}
+
+
+.shop-options button:hover {
+
+    border-color: white;
+
+    background: #272727;
+
+}
+
+
+.shop-options span {
+
+    display: block;
+
+    font-weight: bold;
+
+}
+
+
+.shop-options small {
+
+    display: block;
+
+    margin-top: 6px;
+
+    color: #ffd43b;
+
+}
+
+
+.cancel-button {
+
+    width: 100%;
+
+    margin-top: 15px;
+
+    padding: 10px;
+
+    background: #222 !important;
+
+    color: #999 !important;
+
+}
+
+
+/* ================= MESSAGE ================= */
+
+#gameMessage {
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    pointer-events: none;
+
+    text-align: center;
+
+    opacity: 0;
+
+    transition: opacity 0.2s;
+
+    z-index: 40;
+
+}
+
+
+#gameMessage.show {
+
+    opacity: 1;
+
+}
+
+
+/* ================= SCREENS ================= */
+
+.screen {
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(5,5,5,0.94);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 100;
+
+}
+
+
+.screen h1 {
+
+    font-size: 65px;
+
+    letter-spacing: 12px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.screen p {
+
+    color: #888;
+
+    margin-bottom: 30px;
+
+}
+
+
+.screen button {
+
+    padding: 15px 45px;
+
+    background: white;
+
+    color: black;
+
+    border: none;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    letter-spacing: 2px;
+
+}
+
+
+.controls {
+
+    margin-top: 25px;
+
+    color: #555;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+}
+
+
+#finalStats {
+
+    text-align: center;
+
+    line-height: 2;
+
+    color: #aaa;
+
+    margin-bottom: 25px;
+
+}
+
+
+/* ================= HIDDEN ================= */
+
+.hidden {
+
+    display: none !important;
+
+}

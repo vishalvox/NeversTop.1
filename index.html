@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>OFFICE HUNT</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="game-container">
+
+    <canvas id="gameCanvas"></canvas>
+
+
+    <!-- ================= HUD ================= -->
+
+    <div id="hud">
+
+        <div class="hud-left">
+
+            <div class="logo">
+                OFFICE HUNT
+            </div>
+
+            <div class="stat-label">
+                HEALTH
+            </div>
+
+            <div class="health-background">
+                <div id="healthBar"></div>
+            </div>
+
+        </div>
+
+
+        <div class="hud-center">
+
+            <div id="timer">
+                00:00
+            </div>
+
+            <div class="level-text">
+                LEVEL <span id="level">1</span>
+            </div>
+
+        </div>
+
+
+        <div class="hud-right">
+
+            <div class="money">
+                📀 <span id="money">0</span>
+            </div>
+
+            <div class="points">
+                ✨ <span id="points">0</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= TARGET COUNT ================= -->
+
+    <div id="targetInfo">
+
+        TARGETS:
+        <span id="kills">0</span>
+
+    </div>
+
+
+    <!-- ================= TOOL BAR ================= -->
+
+    <div id="toolBar" class="locked">
+
+        <div class="tool-slot" id="slot1">
+
+            <div class="key">
+                1
+            </div>
+
+            <div class="tool-icon">
+                +
+            </div>
+
+            <div class="tool-name">
+                EMPTY
+            </div>
+
+            <div class="tool-status">
+                BUY
+            </div>
+
+        </div>
+
+
+        <div class="tool-slot" id="slot2">
+
+            <div class="key">
+                2
+            </div>
+
+            <div class="tool-icon">
+                +
+            </div>
+
+            <div class="tool-name">
+                EMPTY
+            </div>
+
+            <div class="tool-status">
+                BUY
+            </div>
+
+        </div>
+
+
+        <div class="tool-slot" id="slot3">
+
+            <div class="key">
+                3
+            </div>
+
+            <div class="tool-icon">
+                +
+            </div>
+
+            <div class="tool-name">
+                EMPTY
+            </div>
+
+            <div class="tool-status">
+                BUY
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= TOOL UNLOCK POPUP ================= -->
+
+    <div id="unlockPopup" class="popup hidden">
+
+        <div class="popup-box">
+
+            <div class="unlock-icon">
+               💣🤡
+            </div>
+
+            <h1>
+                TOOL ACCESS
+            </h1>
+
+            <p>
+                You've reached 1,000.
+            </p>
+
+            <p class="small-text">
+                New tools are now available.
+            </p>
+
+            <button id="continueButton">
+                CONTINUE
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= SHOP ================= -->
+
+    <div id="shop" class="popup hidden">
+
+        <div class="shop-box">
+
+            <h2>
+                TOOL SHOP
+            </h2>
+
+            <div class="shop-money">
+
+                MONEY:
+                <span id="shopMoney">0</span>
+
+            </div>
+
+
+            <div class="shop-options">
+
+                <button data-tool="emp">
+
+                    <span>💣 EMP</span>
+
+                    <small>
+                        500
+                    </small>
+
+                </button>
+
+
+                <button data-tool="smoke">
+
+                    <span>💨 SMOKE</span>
+
+                    <small>
+                        600
+                    </small>
+
+                </button>
+
+
+                <button data-tool="trap">
+
+                    <span> 💀 TRAP</span>
+
+                    <small>
+                        700
+                    </small>
+
+                </button>
+
+
+                <button data-tool="medkit">
+
+                    <span> 💓 MED KIT</span>
+
+                    <small>
+                        400
+                    </small>
+
+                </button>
+
+            </div>
+
+
+            <button
+                id="closeShop"
+                class="cancel-button"
+            >
+                CANCEL
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= MESSAGE ================= -->
+
+    <div id="gameMessage"></div>
+
+
+    <!-- ================= START SCREEN ================= -->
+
+    <div id="startScreen" class="screen">
+
+        <h1>
+            OFFICE HUNT
+        </h1>
+
+        <p>
+            Earn money. Unlock tools. Survive.
+        </p>
+
+        <button id="startButton">
+            START RUN
+        </button>
+
+        <div class="controls">
+            WASD / ARROW KEYS — MOVE
+        </div>
+
+    </div>
+
+
+    <!-- ================= GAME OVER ================= -->
+
+    <div
+        id="gameOverScreen"
+        class="screen hidden"
+    >
+
+        <h1>
+            RUN OVER
+        </h1>
+
+        <div id="finalStats"></div>
+
+        <button id="restartButton">
+            TRY AGAIN
+        </button>
+
+    </div>
+
+</div>
+
+
+<script src="game.js"></script>
+
+</body>
+</html>
